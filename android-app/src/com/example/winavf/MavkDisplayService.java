@@ -88,8 +88,12 @@ public final class MavkDisplayService extends Service {
                         close(channel);channel=null;surface=null;owner=0;
                         target.release();running=false;
                     }
-                    try{java.nio.file.Files.writeString(new File(report.getParentFile(),"mavk-runtime-exit.txt").toPath(),Integer.toString(status));}
-                    catch(IOException ignored){}
+                    try {
+                        File exitReport = new File(report.getParentFile(), "mavk-runtime-exit.txt");
+                        java.nio.file.Files.write(exitReport.toPath(),
+                                Integer.toString(status).getBytes(java.nio.charset.StandardCharsets.UTF_8));
+                    } catch (IOException ignored) {
+                    }
                     stopSelf();
                 }
             },"UAVF-Mavk-renderer").start();

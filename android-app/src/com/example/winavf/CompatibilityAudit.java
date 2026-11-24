@@ -171,7 +171,8 @@ final class CompatibilityAudit {
         File directory = context.getExternalFilesDir(null);
         if (directory == null) return;
         try {
-            Files.writeString(new File(directory, filename).toPath(), content);
+            Files.write(new File(directory, filename).toPath(),
+                    content.getBytes(java.nio.charset.StandardCharsets.UTF_8));
         } catch (IOException error) {
             Log.w("UAVF-Compat", "Could not save " + filename, error);
         }

@@ -39,7 +39,7 @@ final class WindowsBootProbes {
                 String marker = readMarker(disk);
                 if (marker != null) {
                     File report = new File(directory, "winpe-userland-marker.txt");
-                    Files.writeString(report.toPath(), marker, StandardCharsets.US_ASCII);
+                    Files.write(report.toPath(), marker.getBytes(StandardCharsets.US_ASCII));
                     show.accept("WINPE_USERLAND marker found: " + marker.replace("\r", " ").replace("\n", " | "));
                     return;
                 }
